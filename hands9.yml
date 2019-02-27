@@ -1,0 +1,13 @@
+--- # tag functionality playbook
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  tasks: 
+   - name: install apache 
+     yum: pkg=httpd state=latest
+   - name: wait for the server to start listining on port 80
+     wait_for:
+       port: 80
+       state: started
+ 

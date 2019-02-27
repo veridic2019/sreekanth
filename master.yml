@@ -1,0 +1,15 @@
+--- # master 
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  pre_tasks:
+   - name: start of the role
+     raw : date > /home/ansible/rolestart.log
+  roles:
+    - { role: redhatwebservers, when: ansible_os_family == "redhat" }
+    - { role: debianwebservers, when: ansible_os_family == "debian" } 
+  post_tasks:
+   - name: end of the role
+     raw: date > /home/ansible/roleend.log
+

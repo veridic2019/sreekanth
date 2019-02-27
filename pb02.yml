@@ -1,0 +1,12 @@
+--- # My first yaml playbook
+- hosts: all
+  user: ansible
+  sudo: yes    
+  connection: ssh
+  gather_facts: no
+  vars_prompt:
+   - name: pkg_name
+     prompt: enter package name
+  tasks:
+   - name: install httpd server in slave
+     yum: pkg='{{pkg_name}}' state=installed

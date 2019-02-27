@@ -1,0 +1,8 @@
+--- # tag functionality playbook
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  tasks:
+   - name: install apache
+     yum: pkg='{{ pkgname }}' state=latest

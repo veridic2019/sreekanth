@@ -1,0 +1,14 @@
+--- # master playbook 
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  pre_task:
+   - name: start of the role
+     raw : date > /home/ansible/rolestart.log
+   roles:
+    - webservers
+  post_task:
+   - name: end of the role
+     raw : date > /home/ansible/roleend.log
+ 

@@ -1,0 +1,15 @@
+--- # Running tasks parallely
+- hosts: all
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  tasks:
+   - name: install apache
+     action: yum name=httpd state=installed
+     async: 10
+     poll: 2
+     notify: restart httpd
+  handlers:
+   - name: restart the httpd
+     action: service name=httpd state=restarted
+

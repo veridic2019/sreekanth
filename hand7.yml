@@ -1,0 +1,10 @@
+--- # include task playbook example
+- hosts: demo
+  user: ansible
+  sudo: yes
+  connection: ssh
+  tasks:
+   - include: includestat.yml
+   - name: verify the  install apache
+     command: yum list installed | grep httpd > /tmp/result.log
+

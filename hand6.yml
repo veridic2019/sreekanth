@@ -1,0 +1,15 @@
+--- # when playbook example
+- hosts: demo
+  user: ansible
+  sudo: yes
+  connection: ssh
+  tasks:
+   - name: install apache
+     yum: pkg=httpd state=latest
+   - name: verify service status
+     shell: systemctl status httpd
+     register: result
+     until: result.stdout.find("active(running)") != -1
+     retries: 5
+     delay: 5
+   - debug: var=result

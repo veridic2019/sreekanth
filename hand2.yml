@@ -1,0 +1,18 @@
+--- # outline to playbook translation
+- hosts: all
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  tasks:
+   - name: date/time stamp for playbook start
+     raw: /usr/bin/date > /home/ansible/playbooks_start.log
+   - name: install the apache web server
+     yum: pkg=httpd state=latest
+     notify: restart the httpd
+   - name: install cilent software - telnet
+     yum: pkg=telnet state=latest
+   - name: date/time stamp for playbooks end
+     raw: /usr/bin/date > /home/ansible/playbooks_end.log
+  handlers:
+   - name: restart the httpd
+     action: service name=httpd state=restarted 
